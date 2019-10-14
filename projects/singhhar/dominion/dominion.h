@@ -130,7 +130,7 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 
 int baron_action (struct gameState *, int , int );
 int minion_action(struct gameState *, int, int, int, int);
-int ambassabor_action (struct gameState *, int, int, int, int);
+int ambassador_action (struct gameState *, int, int, int, int);
 int tribute_action (struct gameState*  , int , int *, int );
 int mine_action (struct gameState* , int , int , int , int );
 
