@@ -33,26 +33,26 @@ int main() {
 
     // printf("%d\n", temp.supplyCount[temp.hand[1][2]]);
     // temp.hand
-    int choice1 = 3;
-    int choice2 = 1;
-    int handpos = 1;
+    // int choice1 = 3;
+    // int choice2 = 1;
+    // int handpos = 1;
     int nextPlayer = 1;
     int currentPlayer = 0;
     int prev = temp.playedCardCount;
     
 
-    tribute_action(&temp, 1, tributeRevealedCards, 0);
+    tribute_action(&G, 1, tributeRevealedCards, 0);
     int correct = tributeRevealedCards[0];
-    if (correct == tributeRevealedCards[0]) {
-        printf("Error in tribute action\n");
-    }
+    // if (correct == tributeRevealedCards[0]) {
+    //     printf("Error in tribute action here\n");
+    // }
 
     temp.deckCount[nextPlayer] = 0;
     temp.discardCount[nextPlayer] = 0;
     
     tribute_action(&temp, 1, dup_tributeRevealedCards, 0);
     if (temp.playedCardCount != prev + 1) {
-        printf("Error in tribute action\n");
+        printf("Error in tribute action\n");    // Should not give an error
     }
 
     temp.deckCount[nextPlayer] = 0;
@@ -65,6 +65,17 @@ int main() {
     // printf("%d\n", temp.deckCount[nextPlayer]);
     tribute_action(&temp, 1, tributeRevealedCards, 0);
     if (correct != tributeRevealedCards[0]) {
+        printf("Error in tribute action\n");    // Gives an Error
+    }
+
+    temp.deckCount[nextPlayer] = 1;
+    int _prev = temp.deckCount[nextPlayer];
+    
+    // printf(temp.deckCount[nextPlayer]);
+    tribute_action(&temp, 1, tributeRevealedCards, 0);
+    // printf("%d\n", temp.deckCount[nextPlayer]);
+
+    if (_prev-1 != temp.deckCount[nextPlayer]) {
         printf("Error in tribute action\n");
     }
 

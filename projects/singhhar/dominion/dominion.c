@@ -1269,10 +1269,8 @@ int tribute_action (struct gameState*  state, int nextPlayer, int *tributeReveal
 
         if (tributeRevealedCards[0] == tributeRevealedCards[1]) { //If we have a duplicate card, just drop one
             state->playedCards[state->playedCardCount] = tributeRevealedCards[1];
-            printf("insde %d\n", state->playedCardCount);
             state->playedCardCount++;
             tributeRevealedCards[1] = -1;
-            printf("insde %d\n", state->playedCardCount);
         }
 
         for (i = 0; i <= 2; i ++) {
