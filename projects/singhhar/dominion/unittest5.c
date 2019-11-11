@@ -31,15 +31,16 @@ int main() {
     temp.hand[1][3] = 2;
 
     int choice1 = 1;
-    int choice2 = 9;
+    int choice2 = 5;
     // mine_action(&temp, choice1, choice2, 0, 2);
+    // printf("choice %d\n", getCost(choice2));
+    // printf("state->hand %d\n", (getCost(temp.hand[0][choice1]) + 4));
     int x = mine_action(&temp, choice1, choice2, 0, 2);
-    printf("%d", x);
+    // printf("%d", x);
     if (x == -1){
         printf("error in mine function");
     }
-    printf("choice %d\n", getCost(choice2));
-    printf("state->hand %d\n", (getCost(temp.hand[0][choice1]) + 4));
+    
 
 
 
