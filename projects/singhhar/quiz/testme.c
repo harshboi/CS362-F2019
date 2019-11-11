@@ -2,16 +2,29 @@
 #include<string.h>
 #include<stdlib.h>
 #include<time.h>
+
+
 char inputChar()
 {
     // TODO: rewrite this function
-    return ' ';
+    int random = rand()%9;
+    char str[100] = "[({ ax})]";
+    return (str[random]);
 }
+
 char *inputString()
 {
     // TODO: rewrite this function
-    return "";
+    char *word = malloc(10*sizeof(char));
+    int i=0;
+    word[5] = '\0';
+    while(i<5){
+      word[i] = rand()%22 + 97; 
+      i++;
+    }
+    return (word);
 }
+
 void testme()
 {
   int tcCount = 0;
@@ -41,6 +54,7 @@ void testme()
       printf("error ");
       exit(200);
     }
+    free(s);
   }
 }
 int main(int argc, char *argv[])
@@ -49,10 +63,3 @@ int main(int argc, char *argv[])
     testme();
     return 0;
 }
-
-
-
-
-
-
-Annotations
