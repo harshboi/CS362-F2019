@@ -1042,7 +1042,7 @@ int baron_action (struct gameState *state, int choice1, int currentPlayer) {
                         printf("No estate cards in your hand, invalid choice\n");
                         printf("Must gain an estate if there are any\n");
                     }
-                    if (supplyCount(estate, state) < 0) {
+                    if (supplyCount(estate, state) > 0) {
                         gainCard(estate, state, 0, currentPlayer);
 
                         state->supplyCount[estate]--;//Decrement estates
@@ -1052,7 +1052,6 @@ int baron_action (struct gameState *state, int choice1, int currentPlayer) {
                     }
                     card_not_discarded = 0;//Exit the loop
                 }
-
                 else {
                     p++;//Next card
                 }
@@ -1060,9 +1059,8 @@ int baron_action (struct gameState *state, int choice1, int currentPlayer) {
         }
 
         else {
-            if (supplyCount(estate, state) > 0) {
+            if (supplyCount(estate, state) < 0) {
                 gainCard(estate, state, 0, currentPlayer);//Gain an estate
-
                 state->supplyCount[estate]--;//Decrement Estates
                 if (supplyCount(estate, state) == 0) {
                     isGameOver(state);
@@ -1088,6 +1086,7 @@ int baron_action (struct gameState *state, int choice1, int currentPlayer) {
         else if (choice2)		//discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
         {
             //discard hand
+            // printf("%d\n", numHandCards(state) > 0);
             while(numHandCards(state) > 0)
             {
                 drawCard(currentPlayer, state);
@@ -1398,4 +1397,3 @@ int updateCoins(int player, struct gameState *state, int bonus)
 
 
 //end of dominion.c
-
