@@ -32,14 +32,17 @@ int main() {
         }
         G.handCount[p] = initial;
         int j;
-        for (j=0; j<50;j++) {
-            gainCard(types[rand()%10], &G, 1, 0);
-            gainCard(types[rand()%10], &G, 1, 1);
-        }
+
         // NOTE: UNCOMMENTING THE LINES BELOW WILL CAUSE AN INFINITE LOOP (BUG I INTRODUCED IN THE LAST ASSIGNMENT)
         // G.handCount[p] = 10;    
         // minion_action(&G, 0, 1, 0, p);
-
+        // NOTE: Commenting lines for the gaincard for player 1 will cause the test to go into an infinite loop
+        for (j=0; j<50;j++) {
+        //     gainCard(types[rand()%10], &G, 1, 0);        # NOTE: RANDOM IN HERE
+        //     gainCard(types[rand()%10], &G, 2, 0);
+            gainCard(types[rand()%10], &G, 1, 1);
+            gainCard(types[rand()%10], &G, 2, 1);
+        }
         if (G.handCount[p] != 4){
             printf("Error in minion action\n");
         }

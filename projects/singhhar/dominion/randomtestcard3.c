@@ -13,7 +13,6 @@ int main() {
     int coppers[MAX_HAND];
     int p = 1;
     int handCount = p;
-    printf("Begin Testing Ambassador Function():\n");
 
     memset(&G, 23, sizeof(struct gameState));        // setthe game state
     initializeGame(2, types, seed, &G);            // initialize a new game
@@ -21,7 +20,7 @@ int main() {
     memcpy(G.hand[p], coppers, sizeof(int) * handCount);        // call the refactoredfunction
     int tributeRevealedCards[2] = {copper, duchy};
     int dup_tributeRevealedCards[2] = {duchy, duchy};
-
+    int i = 0;
     G.handCount[1] = 5;
     G.handCount[0] = 5;
     G.hand[1][0] = 1;
@@ -29,52 +28,49 @@ int main() {
     G.hand[1][2] = 2;
     G.hand[1][3] = 2;
 
-    // printf("%d\n", G.supplyCount[G.hand[1][2]]);
-    // G.hand
-    // int choice1 = 3;
-    // int choice2 = 1;
-    // int handpos = 1;
-    int nextPlayer = 1;
-    int currentPlayer = 0;
-    int prev = G.playedCardCount;
-    
+    for (i=0; i<100; i++) {
+        
+        // printf("%d\n", G.supplyCount[G.hand[1][2]]);
+        // G.hand
+        // int choice1 = 3;
+        // int choice2 = 1;
+        // int handpos = 1;
+        int nextPlayer = 1;
+        int currentPlayer = 0;
+        int prev = G.playedCardCount;
+        
+        int j;
+        for (j=0; j<2;j++) {
+            gainCard(types[rand()%10], &G, 1, 0);
+            gainCard(types[rand()%10], &G, 2, 0);
+            gainCard(types[rand()%10], &G, 1, 1);
+            gainCard(types[rand()%10], &G, 2, 1);
+        }
+        tribute_action(&G, 1, tributeRevealedCards, 0);
+        int correct = tributeRevealedCards[0];
+        // if (correct == tributeRevealedCards[0]) {
+        //     printf("Error in tribute action here\n");
+        // }
 
-    tribute_action(&G, 1, tributeRevealedCards, 0);
-    int correct = tributeRevealedCards[0];
-    // if (correct == tributeRevealedCards[0]) {
-    //     printf("Error in tribute action here\n");
-    // }
+        // G.deckCount[nextPlayer] = 0;
+        // G.discardCount[currentPlayer] = 1;
+        // G.discardCount[nextPlayer] = 0;
+        correct = tributeRevealedCards[0];
 
-    G.deckCount[nextPlayer] = 0;
-    G.discardCount[nextPlayer] = 0;
-    
-    tribute_action(&G, 1, dup_tributeRevealedCards, 0);
-    if (G.playedCardCount != prev + 1) {
-        printf("Error in tribute action\n");    // Should not give an error
+        tribute_action(&G, 1, tributeRevealedCards, 0);
+        if (correct != tributeRevealedCards[0]) {
+            printf("Error in tribute action\n");    // Gives an Error
+        }
+
+        // G.deckCount[nextPlayer] = 1;
+        int _prev = G.deckCount[nextPlayer];
+        
+        // printf(G.deckCount[nextPlayer]);
+        tribute_action(&G, 1, tributeRevealedCards, 0);
+        // printf("%d\n", G.deckCount[nextPlayer]);
+
+        if (_prev-1 != G.deckCount[nextPlayer]) {
+            printf("Error in tribute action last\n");
+        }
     }
-
-    G.deckCount[nextPlayer] = 0;
-    G.discardCount[currentPlayer] = 1;
-    G.discardCount[nextPlayer] = 0;
-    correct = tributeRevealedCards[0];
-
-    // printf("%d\n", tributeRevealedCards[0]);
-    // printf("%d\n", G.discardCount[nextPlayer]);
-    // printf("%d\n", G.deckCount[nextPlayer]);
-    tribute_action(&G, 1, tributeRevealedCards, 0);
-    if (correct != tributeRevealedCards[0]) {
-        printf("Error in tribute action\n");    // Gives an Error
-    }
-
-    G.deckCount[nextPlayer] = 1;
-    int _prev = G.deckCount[nextPlayer];
-    
-    // printf(G.deckCount[nextPlayer]);
-    tribute_action(&G, 1, tributeRevealedCards, 0);
-    // printf("%d\n", G.deckCount[nextPlayer]);
-
-    if (_prev-1 != G.deckCount[nextPlayer]) {
-        printf("Error in tribute action\n");
-    }
-
 }
