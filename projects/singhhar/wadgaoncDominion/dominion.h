@@ -128,10 +128,4 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 /* Set array position of each player who won (remember ties!) to
    1, others to 0 */
 
-int baron_action (struct gameState *, int , int );
-int minion_action(struct gameState *, int, int, int, int);
-int ambassador_action (struct gameState *, int, int, int, int);
-int tribute_action (struct gameState*  , int , int *, int );
-int mine_action (struct gameState* , int , int , int , int );
-
 #endif
